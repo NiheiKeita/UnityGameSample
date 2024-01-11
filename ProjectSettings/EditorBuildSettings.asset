@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/TopScene.unity
     guid: 698550866376f814d936c5dbdad49fcc
   - enabled: 1
-    path: Assets/Scenes/BallGameScrne.unity
+    path: Assets/Scenes/BallGameScene.unity
     guid: 4ab059cd89a0b7b4b960ff77726c9084
   m_configObjects: {}

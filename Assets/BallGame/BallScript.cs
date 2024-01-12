@@ -7,6 +7,8 @@ public class BallScript : MonoBehaviour
     [SerializeField]
     private float speed = 1.0f;
 
+    // private float i = 0;
+
     private Rigidbody rigidBody;
 
     void Start()
@@ -16,6 +18,8 @@ public class BallScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Debug.Log(i);
+        // i +=1;
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
@@ -26,9 +30,9 @@ public class BallScript : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            Vector3 forceDirection = new Vector3(0f, -1.0f, 0f);
+            Vector3 forceDirection = new Vector3(0f, 1.0f, 0f);
 
-            float forceMagnitude = 5.0f;
+            float forceMagnitude = 10.0f;
 
             Vector3 force = forceMagnitude * forceDirection;
 

@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BoardScript : MonoBehaviour
 {
     [SerializeField]
     private float speed = 1.0f;
 
+    [SerializeField] TextMeshProUGUI _text;
     private Rigidbody rigidBody;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         GetComponent<Rigidbody>().centerOfMass = new Vector3(0f, 10f, 0f);
+        _text.text = "start";
     }
 
     private void FixedUpdate()
@@ -28,61 +31,27 @@ public class BoardScript : MonoBehaviour
             Debug.Log(transform.eulerAngles.x);
             if(30f < transform.eulerAngles.z && transform.eulerAngles.z < 180f ){return;}
 			transform.Rotate(0, 0, dz);
+            // _text.text = "up";
 		}
  
 		if (Input.GetKey("down")) {
             if(180f < transform.eulerAngles.z && transform.eulerAngles.z < 330f ){return;}
 			transform.Rotate(0, 0, dz);
+            // _text.text = "down";
 		}
  
 		if (Input.GetKey("left")) {
             if(180f < transform.eulerAngles.x && transform.eulerAngles.x < 330f ){return;}
 			transform.Rotate(dx, 0, 0);
+            // _text.text = "left";
 		}
  
 		if (Input.GetKey("right")) {
             if(30f < transform.eulerAngles.x && transform.eulerAngles.x < 180f ){return;}
 			transform.Rotate(dx, 0, 0);
+            // _text.text = "right";
 		}
-
-        // Transform myTransform = this.transform;
- 
-
-        // Transform myTransform = this.transform;
-        // Vector3 LocalAngle = myTransform.eulerAngles;
-        // // if (Input.GetKeyUp(KeyCode.Space)){
-        // //     Debug.Log("osita");
-        // //     Transform myTransform = this.transform;
-        // //     //ワールド座標を基準に、回転取得
-        // //     LocalAngle.x = LocalAngle.x + 0.0f; //ワールド座標を基準にした、x軸を軸にした回転角度
-        // //     LocalAngle.y =  LocalAngle.y + 1.0f; //ワールド座標を基準にした、y軸を軸にした回転角度
-        // //     LocalAngle.z = LocalAngle.z + 1.0f; //ワールド座標を基準にした、z軸を軸にした回転角度
-        // //     myTransform.eulerAngles = LocalAngle; 
-        // // }
-        // if (Input.GetKey("up")) {
-        //     LocalAngle.y =  LocalAngle.y + 1.0f;
-		// }
-		// if (Input.GetKey("down")) {
-        //     LocalAngle.y =  LocalAngle.y - 1.0f;
-		// }
-		// if (Input.GetKey("left")) {
-		// 	LocalAngle.z = LocalAngle.z + 1.0f;
-		// }
-		// if (Input.GetKey("right")) {
-		// 	LocalAngle.z = LocalAngle.z - 1.0f;
-		// }
-        // myTransform.eulerAngles = LocalAngle; 
+         _text.text = "経過時間(秒)" +Time.time.ToString("n2");
+// Debug.Log ("経過時間(秒)" + Time.time);
     }
-    // public void OnPressLeftButton()
-    // {
-    //         Vector3 forceDirection = new Vector3(0.0f, 1.0f, 0f);
-
-    //         float forceMagnitude = 5.0f;
-
-    //         Vector3 force = forceMagnitude * forceDirection;
-
-    //         Rigidbody rb = gameObject.GetComponent<Rigidbody>();
-
-    //         rb.AddForce(force, ForceMode.Impulse);
-    // }
 }

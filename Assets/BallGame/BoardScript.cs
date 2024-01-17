@@ -11,6 +11,9 @@ public class BoardScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI _text;
     private Rigidbody rigidBody;
 
+    
+    private bool isStart = false;
+    private float startTime;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -21,6 +24,7 @@ public class BoardScript : MonoBehaviour
     private void FixedUpdate()
     {
     }
+
     void Update()
     {
         Transform transform = this.transform;
@@ -28,30 +32,54 @@ public class BoardScript : MonoBehaviour
 		float dz = Input.GetAxis("Vertical") * 0.04f;
 		float dx = Input.GetAxis("Horizontal") * 0.04f;
 		if (Input.GetKey("up")) {
-            Debug.Log(transform.eulerAngles.x);
-            if(30f < transform.eulerAngles.z && transform.eulerAngles.z < 180f ){return;}
-			transform.Rotate(0, 0, dz);
-            // _text.text = "up";
+            if(30f < transform.eulerAngles.z && transform.eulerAngles.z < 180f ){
+                // 
+            }else{
+                transform.Rotate(0, 0, dz);
+            }
 		}
  
 		if (Input.GetKey("down")) {
-            if(180f < transform.eulerAngles.z && transform.eulerAngles.z < 330f ){return;}
-			transform.Rotate(0, 0, dz);
-            // _text.text = "down";
+            if(180f < transform.eulerAngles.z && transform.eulerAngles.z < 330f ){
+                // 
+            }else{
+                transform.Rotate(0, 0, dz);
+            }
 		}
- 
 		if (Input.GetKey("left")) {
-            if(180f < transform.eulerAngles.x && transform.eulerAngles.x < 330f ){return;}
-			transform.Rotate(dx, 0, 0);
-            // _text.text = "left";
+            if(180f < transform.eulerAngles.x && transform.eulerAngles.x < 330f ){
+                //
+            }else{
+                transform.Rotate(dx, 0, 0);
+            }
 		}
- 
 		if (Input.GetKey("right")) {
-            if(30f < transform.eulerAngles.x && transform.eulerAngles.x < 180f ){return;}
-			transform.Rotate(dx, 0, 0);
-            // _text.text = "right";
+            if(30f < transform.eulerAngles.x && transform.eulerAngles.x < 180f ){
+                //
+            }else{
+                transform.Rotate(dx, 0, 0);
+            }
 		}
-         _text.text = "経過時間(秒)" +Time.time.ToString("n2");
-// Debug.Log ("経過時間(秒)" + Time.time);
+
+		if ((Input.GetKey("right") || Input.GetKey("left") || Input.GetKey("down") || Input.GetKey("up")) && !isStart) {
+            isStart = true;
+            startTime = Time.time;
+        }
+
+        _text.text = showText();
+
+        //ボードが変な方向に傾かないように修正
+        Vector3 LocalAngle = transform.eulerAngles;
+        LocalAngle.y = 0f;
+        transform.eulerAngles = LocalAngle;
+    }
+
+    private string showText()
+    {
+        string result = "ボードを動かしてください。";
+        if(isStart){
+            result = "経過時間(秒)" + (Time.time - startTime).ToString("n2") ;
+        }
+        return result;
     }
 }

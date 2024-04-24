@@ -29,8 +29,8 @@ public class BoardScript : MonoBehaviour
     {
         Transform transform = this.transform;
 
-		float dz = Input.GetAxis("Vertical") * 0.04f;
-		float dx = Input.GetAxis("Horizontal") * 0.04f;
+		float dz = Input.GetAxis("Vertical") * 0.02f;
+		float dx = Input.GetAxis("Horizontal") * 0.02f;
 		if (Input.GetKey("up")) {
             if(30f < transform.eulerAngles.z && transform.eulerAngles.z < 180f ){
                 // 
